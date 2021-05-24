@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(require('./routes/index'));
 
 app.get("/", function (req, res) {
-    res.send("<h1>Hello World!</h1>")
+    res.send("<h1>API-romivire-servicioWeb</h1>")
   })
 
 app.listen(process.env.PORT || 3000, 
