@@ -13,8 +13,8 @@ client.connect();
 
 const getReservaByID = async (req, res) => {
     const id = parseInt(req.params.id);
-    const response = await pool.query('SELECT * FROM reservas WHERE id = $1', [id]);
-    res.json(response.rows);
+    const response = await client.query('SELECT * FROM reservas WHERE id = $1', [id]);
+    res.status(200).json(response.rows);
 };
 
 const getPlatos = async (req, res) => {
