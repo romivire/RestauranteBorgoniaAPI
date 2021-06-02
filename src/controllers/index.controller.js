@@ -39,6 +39,18 @@ const updateReserva = async (req, res) => {
 module.exports = {
     getReservaByID, getPlatos, updateReserva
 };
+const { Pool } = require('pg');
+const connectionString = 'postgres://qowccxtsleidpp:4eae41bd9221066826cdb4ce29cec80cdc3615f860a5478d773e86b9666e54a9@ec2-52-203-27-62.compute-1.amazonaws.com:5432/d8v6tffvtv17f8'
+
+
+const pool = new Pool({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+
 const getReservaByID = async (req, res) => {
     const id = parseInt(req.params.id);
     const response = await pool.query('SELECT * FROM reservas WHERE id = $1', [id]);
@@ -46,6 +58,8 @@ const getReservaByID = async (req, res) => {
         res.status(200).json(response.rows);
     else
         res.sendStatus(404);
+};
+
 const getPlatos = async (req, res) => {
     const response = await pool.query('SELECT id,nombre,precio,vegetariano,categoria_plato FROM platos;');
     res.status(200).json(response.rows);
@@ -132,4 +146,6 @@ const createReserva = async (req, res) => {
     }
 };
 
+module.exports = {
+    getReservaByID, getPlatos, updateReserva, getImagePlatos, createReserva, getPlatosByCategoria, getPlatosVegetarianos, getPlatosNoVegetarianos
 };
