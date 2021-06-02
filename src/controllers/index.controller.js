@@ -13,10 +13,7 @@ const pool = new Pool({
 const getReservaByID = async (req, res) => {
     const id = parseInt(req.params.id);
     const response = await pool.query('SELECT * FROM reservas WHERE id = $1', [id]);
-    if(response.rows.length >0)
-        res.status(200).json(response.rows);
-    else
-        res.sendStatus(404);
+    res.status(200).json(response.rows);
 };
 
 const getPlatos = async (req, res) => {
