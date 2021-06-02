@@ -39,6 +39,23 @@ const getPlatosNoVegetarianos = async (req, res) => {
     const response = await pool.query("SELECT id,nombre,precio,vegetariano,categoria_plato FROM platos WHERE Vegetariano = 'No'");
     res.status(200).json(response.rows);
 };
+
+const getImagePlatos = async (req, res) => {
+    const id = parseInt(req.params.id);
+    const fs = require('fs');
+    const response = await pool.query("SELECT encode(imagen,'base64') FROM platos WHERE id = $1", [id]);
+    if(response.rows.length >0){
+        var respuesta=Buffer.from(response.rows[0].encode,'base64');
+        var rta=respuesta.toString('utf-8');
+        const mimeType = 'image/png';
+    
+        res.status(200).send(`<img src="data:${mimeType};base64,${rta}" />`);
+    }
+    else{
+        res.sendStatus(404);
+    }
+};
+
 const updateReserva = async (req, res) => {
     const id = parseInt(req.params.id);
     var data = req.body;
