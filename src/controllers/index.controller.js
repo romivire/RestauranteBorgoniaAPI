@@ -58,25 +58,16 @@ const getImagePlatos = async (req, res) => {
 
 const updateReserva = async (req, res) => {
     const id = parseInt(req.params.id);
-    const estado='Pendiente'
-    try{
-        var data = req.body;
+    var data = req.body;
 
-        const response =await pool.query('UPDATE reservas SET fecha = $1, hora = $2, cantidad_personas = $3,observacion = $4,estado = $5 WHERE id = $6', [
-            data.fecha,
-            data.hora,
-            data.cantidad,
-            data.observacion,
-            estado,
-            id
-        ]);
-        res.status(200).json('Reserva modificada');
-    }
-    catch(e){
-        res.status(404).json('No se pudo modificar la reserva porque los valores son invalidos o la reserva no existe');
-    }
-
-    
+    const response =await pool.query('UPDATE reservas SET fecha = $1, hora = $2, cantidad_personas = $3,observacion = $4 WHERE id = $5', [
+        data.fecha,
+        data.hora,
+        data.cantidad,
+        data.observacion,
+        id
+    ]);
+    res.status(200).json('Reserva Updated Successfully');
 };
 
 
