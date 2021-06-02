@@ -20,7 +20,7 @@ const getReservaByID = async (req, res) => {
 };
 
 const getPlatos = async (req, res) => {
-    const response = await pool.query('SELECT * FROM platos;');
+    const response = await pool.query('SELECT id,nombre,precio,vegetariano,categoria_plato FROM platos;');
     res.status(200).json(response.rows);
 };
 
