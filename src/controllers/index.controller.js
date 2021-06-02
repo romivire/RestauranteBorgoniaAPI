@@ -24,21 +24,6 @@ const getPlatos = async (req, res) => {
     res.status(200).json(response.rows);
 };
 
-const getPlatosByCategoria = async (req, res) => {
-    const categoria = req.params.categoria;
-    const response = await pool.query('SELECT id,nombre,precio,vegetariano,categoria_plato FROM platos WHERE categoria_plato = $1',[categoria]);
-    res.status(200).json(response.rows);
-};
-
-const getPlatosVegetarianos = async (req, res) => {
-    const response = await pool.query("SELECT id,nombre,precio,vegetariano,categoria_plato FROM platos WHERE vegetariano = 'Si'");
-    res.status(200).json(response.rows);
-};
-
-const getPlatosNoVegetarianos = async (req, res) => {
-    const response = await pool.query("SELECT id,nombre,precio,vegetariano,categoria_plato FROM platos WHERE Vegetariano = 'No'");
-    res.status(200).json(response.rows);
-};
 const updateReserva = async (req, res) => {
     const id = parseInt(req.params.id);
     var data = req.body;
