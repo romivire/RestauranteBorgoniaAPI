@@ -13,10 +13,10 @@ Routes para la API
     * "fecha" = 2021-10-27
     * "hora" = 19:00:00 
     * "cantidad personas" = 6 
-    * "observacion" = Esto es un simulacro para modificar reserva
+    * "observacion" (parametro opcional) = Esto es un simulacro para modificar reserva
   * CREATE RESERVA -> https://romivire-servicioweb.herokuapp.com/reserva/create : permite crear una nueva reserva con estado 'PENDIENTE'. En el body del request se deben especificar los siguientes parametros (ejemplo)
     * "fecha" = 2021-11-10
     * "hora" = 20:00:00 
     * "cantidad personas" = 6 
-    * "observacion" = Esto es un simulacro para crear reserva
+    * "observacion" (parametro opcional) = Esto es un simulacro para crear reserva
    
