@@ -79,32 +79,7 @@ const updateReserva = async (req, res) => {
     
 };
 
-const createReserva = async (req, res) => {   
-    try{
-        var data = req.body;
-        const estado='Pendiente'
-
-        const response =await pool.query('INSERT INTO reservas (fecha,hora,cantidad_personas,observacion,estado) VALUES ($1,$2,$3,$4,$5) RETURNING id', [
-            data.fecha,
-            data.hora,
-            data.cantidad,
-            data.observacion,
-            estado
-        ]);
-        const idReserva=response.rows[0].id;
-        res.status(200).json({
-            message: 'Reserva creada correctamente',
-            body: {
-                idReserva
-            }
-        })
-        
-    }
-    catch(e){
-        res.status(404).json('No se pudo crear la reserva, los datos son invalidos');
-    }
-};
 
 module.exports = {
-    getReservaByID, getPlatos, updateReserva, getImagePlatos, createReserva, getPlatosByCategoria, getPlatosVegetarianos, getPlatosNoVegetarianos
+    getReservaByID, getPlatos, updateReserva
 };
