@@ -3,13 +3,6 @@ const cors = require('cors');
 
 
 const app = express();
-
-// middlewares
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-// Routes
-app.use(require('./routes/index'));
 app.use(cors);
 
 app.use(function(req,res,next){
@@ -21,6 +14,13 @@ app.use(function(req,res,next){
 
   next();
 });
+// middlewares
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+// Routes
+app.use(require('./routes/index'));
+
 
 app.listen(process.env.PORT || 3000, 
 	() => console.log("Server is running...")); 
