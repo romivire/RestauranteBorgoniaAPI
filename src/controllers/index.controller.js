@@ -60,7 +60,7 @@ const getImagePlatos = async (req, res) => {
             var rta=respuesta.toString('utf-8');
             const mimeType = 'image/png';
         
-            res.status(200).send(`<img src="data:${mimeType};base64,${rta}" />`);
+            res.status(200).send(rta);
         }
         else{
             res.sendStatus(404);
