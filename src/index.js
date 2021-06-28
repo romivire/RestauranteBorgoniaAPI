@@ -1,9 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-
-
 const app = express();
-app.use(cors);
+app.use(cors());
 
 app.use(function(req,res,next){
   res.setHeader('Access-Control-Allow-Origin','*');
@@ -14,6 +12,9 @@ app.use(function(req,res,next){
 
   next();
 });
+
+
+
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -22,6 +23,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(require('./routes/index'));
 
 
-app.listen(process.env.PORT || 3000, 
+
+app.listen(process.env.PORT || 8080, 
 	() => console.log("Server is running...")); 
 
