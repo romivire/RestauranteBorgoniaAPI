@@ -17,7 +17,7 @@ const getReservaByID = async (req, res) => {
         if(response.rows.length >0)
             res.status(200).json(response.rows);
         else
-            res.sendStatus(404);
+            res.status(404).json('No existe una reserva con ese ID');
     }
     catch(e){
         res.status(404).json('Pedido incorrecto');
@@ -93,7 +93,7 @@ const updateReserva = async (req, res) => {
             }
     }
     else{
-        res.status(404).json("Pedido incorrecto");  
+        res.status(404).json('Pedido incorrecto');  
     }
 };
 
@@ -119,7 +119,7 @@ const createReserva = async (req, res) => {
         
     }
     catch(e){
-        res.status(404).json('No se pudo crear la reserva, los datos son invalidos');
+        res.send(e);
     }
 };
 
