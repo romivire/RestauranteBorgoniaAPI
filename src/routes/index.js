@@ -95,7 +95,7 @@ router.get('/platos', getPlatos);
  *      '404':
  *        description: Pedido incorrecto
  *      default:
- *        description: Pedido incorrecto
+ *        description: Error
  */
 router.get('/platos/:categoria', getPlatosByCategoria);
 /**
