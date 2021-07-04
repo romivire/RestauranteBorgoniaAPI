@@ -63,11 +63,12 @@ const getImagePlatos = async (req, res) => {
             res.status(200).send(rta);
         }
         else{
-            res.sendStatus(404);
+            res.status(404).json('No existe un plato con ese ID');
         }
     }
     catch(e){
-        res.status(404).json("Pedido incorrecto");
+        res.status(404).json('Pedido incorrecto');
+
     }
 };
 
@@ -75,25 +76,26 @@ const updateReserva = async (req, res) => {
     const id = parseInt(req.params.id);
     const estado='Pendiente'
     if (id){
-            var data = req.body;
+            try{
+                var data = req.body;
 
-            const response =await pool.query('UPDATE reservas SET fecha = $1, hora = $2, cantidad_personas = $3,observacion = $4,estado = $5 WHERE id = $6', [
-                data.fecha,
-                data.hora,
-                data.cantidad,
-                data.observacion,
-                estado,
-                id
-            ]);
-            if(response.rowCount>0){
+                const response =await pool.query('UPDATE reservas SET fecha = $1, hora = $2, cantidad_personas = $3,observacion = $4,estado = $5 WHERE id = $6', [
+                    data.fecha,
+                    data.hora,
+                    data.cantidad,
+                    data.observacion,
+                    estado,
+                    id
+                ]);
+                
                 res.status(200).json('Reserva modificada');
             }
-            else{
+            catch(e){
                 res.status(404).json('No se pudo modificar la reserva porque los valores son invalidos o la reserva no existe');
-            }
+            }     
     }
     else{
-        res.status(404).json('Pedido incorrecto');  
+        res.status(404).json('No se pudo modificar la reserva porque los valores son invalidos o la reserva no existe'); 
     }
 };
 
@@ -119,7 +121,7 @@ const createReserva = async (req, res) => {
         
     }
     catch(e){
-        res.send(e);
+        res.status(404).json('No se pudo modificar la reserva porque los valores son invalidos o la reserva no existe'); 
     }
 };
 
